@@ -7,10 +7,9 @@
 <title>作曲家烂梗机</title>
 <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAADZ0lEQVR42r3WTW8bVRTG8d+MZ2zH4ziO3SaNm1LUFlGIQKgS7yu2SGxgxRfiu7BAQmKHkLoBJCSEeFm0oYRAoVVS0qR5qWuPZ+5lYZRvgK90pKO7Ov/z3HPuk9y48RJirCHUSGNEIiDGiCBADEiTBDGJSJP0/EaM53mIUIWA1P98sjRNEEOCJE2QzKsOAcVyjguDHrqdNprNDOW0wuHJKU6PxyD+FySNDLNZtSCCeZKe9zGECs9fHeKVl65htHEF3aKPOlQYj8c4PHqM7e1tPD46QS2iCnMV40II5m1LUqirGuvrK3j91haeu3wDg/4GqlmJJKnRzp4gpgHtTguzvRn6az2UVY3TerwQgrnuMULebOCF61dxYTBCb3mI5VaCtfVL6PZ6ODrYw+7ff+BkNEKnmuDRtEbSbuFZXi6GIM6ntEZ/WKDoLiPLWmikKZr5EgarfRSDHnrDJaxfWMHWaAN/767g069/wJEGWu1sMQR1OH+zjVghqcbIsoiqnuFsPMFkMkERO8g7S0jKAuG0hSzLsdrO8GQCraV8MQRVDUmNi8NlrC4vYee3bdy8meHCcgdFL8fk7AQPd/YQJ0/RTyvsPniIRwcnUBTIs3QxBKFGp5uhrirc23mAt996EwcHj3BlOUfRvIafvvset7+5jc2LXWysX8ad3T2U04BxnKI36CyEoJFAPa0QQorXbm1h//4f+HPnHm6NPkAoYW20iXfffAeba0OMZxHPDe+ink0xfhqQ54uZg1BHdFfb5xrcvv0tRksNfPjGFrrtAmcH/2Cl6KF3/WWcHe7jyuXLGK1dxN5kgmG/hfFksqBtGjGdVth7+BhLnSZOiwF+/vMh3rn0PMrp9PzrmDuPtN3C7u/b+OfxEcq0iaCBECyEoBIwPpue+59ev0CeBiSdLvIsYu9gD1c3r6NMKjw5PsDB3Tt4enSIqlhFKEuwGF+UgFldo44B4zLg9GSCrZWnGF69ifv7+7j/1w42RpsY9C/ieOlXHGc5juuAug6YVYshmFc9J1jttPDg8BQvjlMMshonn3+Gax99jP3pBD/v/orq5BiPjs9wXPQRpiXK2QxluRBnl6yvX0KcO+EkoN9s4JPVFvqtHLO1HvJmhsF77+PZzVfx5Vdf4N4vPyLvr+JUxOTZFM/G00UQ/AueJn5Wtep/qwAAAABJRU5ErkJggg==">   <!-- Mozart (Krafft portrait), 16x16 pixels -->
 <style>
-/* 作曲家烂梗机 · 假严肃. BUILT FILE: edit 样板/样板.html and run 样板/build.py instead.
-   (from sample D): the Golden Hall, a Word-style title, two huge portraits, PowerPoint entrances.
-   This file is also the tuning page: everything between the sample markers is for tuning only, and
-   build.py makes the finished page from this file with her saved settings fixed in. Only system fonts (China). */
+/* BUILT FILE: edit 样板/样板.html and run 样板/build.py instead.
+   作曲家烂梗机: the Golden Hall, a Word-style title, two huge portraits, PowerPoint entrances.
+   Her settings from the tuning page are fixed in (window.BAKED). Only system fonts (China). */
 :root {
   --heavy: "Microsoft YaHei", "PingFang SC", "Heiti SC", "Noto Sans CJK SC", sans-serif;
   --song: "SimSun", "Songti SC", "STSong", serif;
@@ -54,59 +53,59 @@ body { display: flex; flex-direction: column; }
 
 @media (prefers-reduced-motion: reduce) { .drawer { transition: none; } }
 
-/* ======================= D · 假严肃 ======================= */
-#D { touch-action: pinch-zoom;   /* a one-finger drag draws the note trail; two-finger zoom still works */
-  background: #120a03; color: #f3e2b8; font-family: var(--song); padding: 2vh max(14px, env(safe-area-inset-left, 0px)) 3vh; }
-#D::before { content: ""; position: absolute; inset: -12px; z-index: 0; background: url("portraits/golden-hall.jpg") center 30% / cover no-repeat;
+/* ======================= the page ======================= */
+#hall { touch-action: pinch-zoom;   /* a one-finger drag draws the note trail; two-finger zoom still works */
+  background: #120a03; color: #f3e2b8; font-family: var(--song); padding: 2vh max(16px, env(safe-area-inset-right, 0px)) 3vh max(16px, env(safe-area-inset-left, 0px)); }   /* the side gutter keeps the sentence 16px off each edge */
+#hall::before { content: ""; position: absolute; inset: -12px; z-index: 0; background: url("portraits/golden-hall.jpg") center 30% / cover no-repeat;
   filter: blur(1.5px) brightness(.62) sepia(.2) saturate(1.15); }
-#D::after { content: ""; position: absolute; inset: 0; z-index: 0; background: radial-gradient(ellipse at 50% 40%, transparent 30%, rgba(0,0,0,.7) 100%); }
-#D .bigduo { position: absolute; inset: 0; z-index: 1; display: flex; justify-content: space-between; pointer-events: none; }
-#D .big { height: 100%; background: center 15% / cover no-repeat; opacity: 0; filter: sepia(.25) contrast(1.05);
+#hall::after { content: ""; position: absolute; inset: 0; z-index: 0; background: radial-gradient(ellipse at 50% 40%, transparent 30%, rgba(0,0,0,.7) 100%); }
+#hall .bigduo { position: absolute; inset: 0; z-index: 1; display: flex; justify-content: space-between; pointer-events: none; }
+#hall .big { height: 100%; background: center 15% / cover no-repeat; opacity: 0; filter: sepia(.25) contrast(1.05);
   display: grid; place-items: center; color: rgba(243,226,184,.35); font: 700 clamp(16px, 2.4vw, 30px) var(--song); }
-#D .big.shown { opacity: .5; }
+#hall .big.shown { opacity: .5; }
 
 /* portraits: one even opacity, with only a narrow soft edge all round (no visible borders); on tall screens
    they're wide enough to overlap in the middle, so the middle never empties out */
-#D .big { -webkit-mask-image: linear-gradient(to right, transparent 0, #000 15%, #000 85%, transparent 100%), linear-gradient(to bottom, #000 0, #000 62%, transparent 98%);
+#hall .big { -webkit-mask-image: linear-gradient(to right, transparent 0, #000 15%, #000 85%, transparent 100%), linear-gradient(to bottom, #000 0, #000 62%, transparent 98%);
   mask-image: linear-gradient(to right, transparent 0, #000 15%, #000 85%, transparent 100%), linear-gradient(to bottom, #000 0, #000 62%, transparent 98%);
   -webkit-mask-composite: source-in; mask-composite: intersect; }
 /* the two portraits sit side by side around the centre, always the same size relative to each other and
    overlapping by the same share (4% of a portrait), whatever the screen's width or shape */
-#D .bigduo { --pw: min(52vw, 70vh); --gap: calc(var(--pw) * -.04); }   /* overlap: 4% of a portrait */
-#D .big { position: absolute; top: 0; height: 100%; width: var(--pw); }
-#D .big:first-child { left: calc(50% - var(--gap) / 2 - var(--pw)); }
-#D .big:last-child { left: calc(50% + var(--gap) / 2); }
-#D .d-head { position: relative; z-index: 3; text-align: center; flex: none; }
-#D .d-rule { color: #c9a34a; letter-spacing: .1em; font-size: clamp(10px, 1.4vw, 16px); }
-#D .d-title { display: inline-block; margin: .3em 0 .5em; font: 400 clamp(30px, min(7vw, 9vh), 80px)/1.1 "SimSun", "Songti SC", "STSong", serif;
+#hall .bigduo { --pw: min(52vw, 70vh); --gap: calc(var(--pw) * -.04); }   /* overlap: 4% of a portrait */
+#hall .big { position: absolute; top: 0; height: 100%; width: var(--pw); }
+#hall .big:first-child { left: calc(50% - var(--gap) / 2 - var(--pw)); }
+#hall .big:last-child { left: calc(50% + var(--gap) / 2); }
+#hall .d-head { position: relative; z-index: 3; text-align: center; flex: none; }
+#hall .d-rule { color: #c9a34a; letter-spacing: .1em; font-size: clamp(10px, 1.4vw, 16px); }
+#hall .d-title { display: inline-block; margin: .3em 0 .5em; font: 400 clamp(30px, min(7vw, 9vh), 80px)/1.1 "SimSun", "Songti SC", "STSong", serif;
   color: #fff; text-shadow: .06em .06em .05em rgba(0,0,0,.85);       /* Word's 外部阴影, plainly visible */
   -webkit-box-reflect: below -.1em linear-gradient(transparent 45%, rgba(255,255,255,.35)); }   /* PPT 映像 */
-#D .d-sub { color: #d9c28a; letter-spacing: .5em; font-size: clamp(11px, 1.5vw, 17px); }
-#D .stage { position: relative; z-index: 3; flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: min(4vh, 28px); }
-#D .sent { font-size: clamp(24px, min(4.6vw, 6.4vh), 60px); max-width: 100%; }
-body.white-sent #D .part { color: #fff; }
-#D .part { font-family: var(--song); font-weight: 700; color: #fbefd0; text-shadow: 0 2px 4px #000, 0 0 14px rgba(0,0,0,.8); }
-#D .btns { display: flex; gap: 12px; flex: none; }
+#hall .d-sub { color: #d9c28a; letter-spacing: .5em; font-size: clamp(11px, 1.5vw, 17px); }
+#hall .stage { position: relative; z-index: 3; flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: min(4vh, 28px); }
+#hall .sent { font-size: clamp(24px, min(4.6vw, 6.4vh), 60px); max-width: 100%; }
+body.white-sent #hall .part { color: #fff; }
+#hall .part { font-family: var(--song); font-weight: 700; color: #fbefd0; text-shadow: 0 2px 4px #000, 0 0 14px rgba(0,0,0,.8); }
+#hall .btns { display: flex; gap: 12px; flex: none; }
 /* buttons as Windows 7 drew them (2009-2015): a soft grey gloss, light blue on hover, deeper blue when pressed */
-#D .go, #D .copy, body[data-t="D"] .drawer-btn {
+#hall .go, #hall .copy, body[data-t="hall"] .drawer-btn {
   font: 400 clamp(14px, 1.6vw, 17px)/1.2 "Microsoft YaHei UI", "Microsoft YaHei", "PingFang SC", sans-serif; color: #1e1e1e;
   padding: 7px 26px; min-width: 7.5em; border: 1px solid #707070; border-radius: 3px; text-shadow: none;
   background: linear-gradient(#f2f2f2 0%, #ebebeb 49%, #dddddd 50%, #cfcfcf 100%);
   box-shadow: inset 0 0 0 1px rgba(255,255,255,.75); transition: background .2s, border-color .2s, box-shadow .2s; }
-#D .go { border-color: #3c7fb1; box-shadow: inset 0 0 0 1px #9fd7fb, 0 0 6px rgba(80,170,255,.35); }   /* the default button */
-#D .go:hover, #D .copy:hover, body[data-t="D"] .drawer-btn:hover { border-color: #3c7fb1; filter: none;
+#hall .go { border-color: #3c7fb1; box-shadow: inset 0 0 0 1px #9fd7fb, 0 0 6px rgba(80,170,255,.35); }   /* the default button */
+#hall .go:hover, #hall .copy:hover, body[data-t="hall"] .drawer-btn:hover { border-color: #3c7fb1; filter: none;
   background: linear-gradient(#eaf6fd 0%, #d9f0fc 49%, #bee6fd 50%, #a7d9f5 100%); }
-#D .go:active, #D .copy:active, body[data-t="D"] .drawer-btn:active { border-color: #2c628b; transition: none;
+#hall .go:active, #hall .copy:active, body[data-t="hall"] .drawer-btn:active { border-color: #2c628b; transition: none;
   background: linear-gradient(#e5f4fc 0%, #c4e5f6 49%, #98d1ef 50%, #68b3db 100%); box-shadow: inset 0 1px 2px rgba(0,0,0,.28); }
-#D .go:focus-visible, #D .copy:focus-visible, body[data-t="D"] .drawer-btn:focus-visible { outline: 1px dotted #000; outline-offset: -4px; }
-body[data-t="D"] .drawer-btn { min-width: 0; padding: 5px 14px; font-size: 14px; }
-body[data-t="D"] .drawer { background: #1b1006; color: #f3e2b8; font-family: var(--song); border-left: 3px double #c9a34a; }
-body[data-t="D"] .dtitle span:first-child { color: #f6dc8c; letter-spacing: .2em; }
+#hall .go:focus-visible, #hall .copy:focus-visible, body[data-t="hall"] .drawer-btn:focus-visible { outline: 1px dotted #000; outline-offset: -4px; }
+body[data-t="hall"] .drawer-btn { min-width: 0; padding: 5px 14px; font-size: 14px; }
+body[data-t="hall"] .drawer { background: #1b1006; color: #f3e2b8; font-family: var(--song); border-left: 3px double #c9a34a; }
+body[data-t="hall"] .dtitle span:first-child { color: #f6dc8c; letter-spacing: .2em; }
 @media (max-width: 760px) {
-  #D .d-head { padding-right: 0; }
-  #D .d-head { margin-top: 34px; }
+  #hall .d-head { padding-right: 0; }
+  #hall .d-head { margin-top: 34px; }
 }
-@media (max-height: 520px) and (orientation: landscape) { #D .d-sub, #D .d-rule { display: none; } }
+@media (max-height: 520px) and (orientation: landscape) { #hall .d-sub, #hall .d-rule { display: none; } }
 
 /* ---------- the cover: title and one button; and buttons that wait for the show to end ---------- */
 .btns.waiting { visibility: hidden; }
@@ -133,8 +132,8 @@ body.cover .stage { flex: 0 0 auto; }
 </head>
 <body>
 
-<!-- D · 假严肃: the Golden Hall, Song type, an old grey button, two huge portraits behind -->
-<section class="theme on" id="D">
+<!-- the Golden Hall, a Word-style title, two huge portraits behind -->
+<section class="theme on" id="hall">
   <div class="bigduo"><div class="big" data-p="a"></div><div class="big" data-p="b"></div></div>
   <div class="d-head"><h1 class="d-title">作曲家烂梗机</h1></div>
   <div class="stage">
@@ -154,7 +153,7 @@ body.cover .stage { flex: 0 0 auto; }
   <p class="dnote credit">作曲家画像均为公有领域。金色大厅照片：Derbrauni，Wikimedia Commons，CC BY 4.0。</p>
 </aside>
 
-<script>window.BAKED = {"speed": {"master": 1, "fx": {"淡入": 3000, "飞入·自右侧": 4000, "飞入·自左侧": 4000, "飞入·自顶部": 3000, "飞入·自底部": 3000, "弹跳": 2000, "旋转飞入": 1800, "螺旋飞入": 2000, "缩放": 3000, "百叶窗·横": 1500, "百叶窗·竖": 1500, "擦除·自左": 3000, "擦除·自右": 3000, "擦除·自上": 1000, "擦除·自下": 1000, "擦除·中间向两侧": 3000, "擦除·两侧向中间": 3000, "擦除·中心向外": 3000, "打字机": 3000, "翻转": 2000, "回旋": 1700, "光速": 1200, "玩具风车": 2000, "轮子·4 辐": 2000, "菱形": 1800, "盒状": 1800, "十字形扩展": 1800, "棋盘": 2000, "随机线条": 2000, "阶梯状": 2000, "挥鞭式": 1500, "曲线向上": 2000, "浮动": 2000, "升起": 2000, "展开": 1500, "投掷": 1600, "字幕式": 3000, "逐字飞入": 700, "溶解": 2000, "逐字弹跳": 900}, "p": {"按下后停顿": 500, "画像浮现": 900, "大画像浮现（D）": 1400, "两幅画像间隔": 300, "画像后句子开始": 1300, "画像后句子开始（D）": 1500, "四面八方·每块飞行": 1500, "四面八方·块间隔": 450, "打字机·每字间隔": 110, "逐字弹跳·每字间隔": 90, "逐字飞入·每字间隔": 70, "动画后按钮出现": 200, "按钮淡入": 500}}, "title": {"font": "原样", "fill": "彩虹", "shadow": "白灰双层", "stroke": "原样", "bold": false, "reflect": false}, "white": true};   // her settings from the tuning page</script>
+<script>window.BAKED = {"speed": {"master": 1, "fx": {"淡入": 3000, "飞入·自右侧": 4000, "飞入·自左侧": 4000, "飞入·自顶部": 3000, "飞入·自底部": 3000, "弹跳": 2000, "旋转飞入": 1800, "螺旋飞入": 2000, "缩放": 3000, "百叶窗·横": 1500, "百叶窗·竖": 1500, "擦除·自左": 3000, "擦除·自右": 3000, "擦除·自上": 1000, "擦除·自下": 1000, "擦除·中间向两侧": 3000, "擦除·两侧向中间": 3000, "擦除·中心向外": 3000, "打字机": 3000, "翻转": 2000, "回旋": 1700, "光速": 1200, "玩具风车": 2000, "轮子·4 辐": 2000, "菱形": 1800, "盒状": 1800, "十字形扩展": 1800, "棋盘": 2000, "随机线条": 2000, "阶梯状": 2000, "挥鞭式": 1500, "曲线向上": 2000, "浮动": 2000, "升起": 2000, "展开": 1500, "投掷": 1600, "字幕式": 3000, "逐字飞入": 700, "溶解": 2000, "逐字弹跳": 900}, "p": {"按下后停顿": 500, "画像浮现": 1400, "两幅画像间隔": 300, "画像后句子开始": 1500, "四面八方·每块飞行": 1500, "四面八方·块间隔": 450, "打字机·每字间隔": 110, "逐字弹跳·每字间隔": 90, "逐字飞入·每字间隔": 70, "动画后按钮出现": 200, "按钮淡入": 500}}, "title": {"font": "原样", "fill": "彩虹", "shadow": "白灰双层", "stroke": "原样", "bold": false, "reflect": false}, "white": true};   // her settings from the tuning page</script>
 <script src="words.js"></script>
 <script>
 const ASSETS = window.BAKED ? '' : '../';   // the finished page sits one folder up
@@ -168,7 +167,7 @@ function roll() {
 const text = s => s.scene + s.a + '和' + s.b + s.how + s.act + '。';
 const esc = t => t.replace(/[&<>]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]));
 
-// the whole sentence in one steady style per sample (straight-faced, 假正经); the parts stay separate only for the 四面八方 animation
+// the whole sentence in one steady style; the parts stay separate only for the 四面八方 animation
 const part = s => `<span class="anim"><span class="part">${esc(s)}</span></span>`;
 function render(s) {
   return part(s.scene) + part(s.a) + part('和') + part(s.b) + part(s.how) + part(s.act + '。');   // 。 stays with the last word
@@ -217,7 +216,7 @@ function present(s) {
     busy = false;
   }, total + P('动画后按钮出现'));
 }
-const HIST_KEY = window.BAKED ? 'zuoqujia-langeng-ji.history.v2' : 'zuoqujia-langeng-ji.sample-history.v1';
+const HIST_KEY = window.BAKED ? 'zuoqujia-langeng-ji.history.v2' : 'zuoqujia-langeng-ji.tuning-history.v1';
 try { history.push(...(JSON.parse(localStorage.getItem(HIST_KEY)) || []).slice(0, 200)); } catch {}
 function showHistory() {
   document.getElementById('dlist').innerHTML = history.slice(0, 200).map(s => `<li>${esc(text(s))}</li>`).join('');
@@ -301,12 +300,12 @@ const FX = {
 };
 const NAMES = Object.keys(FX);
 
-// ---- speeds: every timing in the show, tunable in the sample's 调速 panel (saved to 样板.data.json) ----
+// ---- speeds: every timing in the show, tunable in the tuning page's 调速 panel ----
 const SPEED_KEY = 'zuoqujia-langeng-ji.speed.v1';
 const P_DEFAULTS = {                     // ms
   '按下后停顿': 500,                     // only the title and the hall, before the portraits come
-  '画像浮现': 900, '大画像浮现（D）': 1400, '两幅画像间隔': 300,
-  '画像后句子开始': 1300, '画像后句子开始（D）': 1500,
+  '画像浮现': 1400, '两幅画像间隔': 300,
+  '画像后句子开始': 1500,
   '四面八方·每块飞行': 1500, '四面八方·块间隔': 450, '打字机·每字间隔': 110, '逐字弹跳·每字间隔': 90, '逐字飞入·每字间隔': 70,
   '动画后按钮出现': 200, '按钮淡入': 500,
 };
@@ -322,6 +321,7 @@ try {
       NAMES.filter(n => n.startsWith('擦除·')).forEach(n => { if (saved.fx[n] == null) saved.fx[n] = w; });
       delete saved.fx['擦除'];
     }
+    if (saved.p) Object.keys(saved.p).forEach(k => { if (!(k in P_DEFAULTS)) delete saved.p[k]; });
     const fx = { ...FX_DEFAULTS, ...saved.fx };
     Object.keys(fx).forEach(k => { if (!(k in FX_DEFAULTS)) delete fx[k]; });   // drop effects that no longer exist
     SPEED = { master: saved.master ?? 1, fx, p: { ...P_DEFAULTS, ...saved.p } };
@@ -346,15 +346,15 @@ function animate(sent) {
     theme.querySelectorAll('.big').forEach((el, i) => {
       el.classList.add('shown');
       const rest = parseFloat(getComputedStyle(el).opacity) || .5;
-      if (!reduce) el.animate([{ opacity: 0, transform: 'scale(1.06)' }, { opacity: rest, transform: 'none' }], { duration: P('大画像浮现（D）'), delay: pause + i * P('两幅画像间隔'), easing: 'ease-out', fill: 'backwards' });
+      if (!reduce) el.animate([{ opacity: 0, transform: 'scale(1.06)' }, { opacity: rest, transform: 'none' }], { duration: P('画像浮现'), delay: pause + i * P('两幅画像间隔'), easing: 'ease-out', fill: 'backwards' });
     });
-    lead = pause + P('画像后句子开始（D）');
+    lead = pause + P('画像后句子开始');
   }
   if (reduce) return 0;
   sent.getAnimations().forEach(a => a.cancel());
   typeTimers.forEach(clearTimeout); typeTimers = [];
   sent.classList.remove('wheel'); sent.style.webkitMaskImage = sent.style.maskImage = '';
-  // 2. the sentence: the chosen effect (in the sample, the picker can fix it), usually one effect for the whole sentence
+  // 2. the sentence: a random effect (the tuning page can fix one), usually one effect for the whole sentence
   const want = document.getElementById('fxpick')?.value || 'random';   // the tuning page can fix one effect
   const fourWay = want === '四面八方' || (want === 'random' && Math.random() < 1 / 6);
   if (fourWay) {
@@ -498,7 +498,8 @@ function fit() {
   const over = () => {
     const s = layoutRect(), g = go.getBoundingClientRect(), box = sent.parentElement.getBoundingClientRect();
     const lowest = Math.max(g.bottom, ...[...go.children].map(b => b.getBoundingClientRect().bottom));
-    return lowest > innerHeight - 4 || hit(s, g) || s.right > innerWidth - 16 || s.left < 16 ||
+    // the sentence's box may fill the line up to the 16px gutter; only shrink when it would cross it
+    return lowest > innerHeight - 4 || hit(s, g) || s.right > innerWidth - 15.5 || s.left < 15.5 ||
            (sent.closest('.bubble') && s.bottom > box.bottom + 1);
   };
   while (over() && size > 12) { size *= 0.93; sent.style.fontSize = size + 'px'; }
@@ -520,11 +521,11 @@ document.getElementById('drawerClose').addEventListener('click', () => setDrawer
 veil.addEventListener('click', () => setDrawer(false));
 addEventListener('keydown', e => { if (e.key === 'Escape') setDrawer(false); });
 
-document.body.dataset.t = 'D';
+document.body.dataset.t = 'hall';
 requestAnimationFrame(fit);
 let last = 0;
 // a trail of little notes behind the pointer: mouse, and fingers or pens on phones and tablets
-const TRAIL = { D: { s: ['♪', '♫', '♩', '♬', '𝄞', '✦'], c: ['#f6dc8c', '#fff3cf', '#ffffff', '#d9b45a'] } };
+const TRAIL = { hall: { s: ['♪', '♫', '♩', '♬', '𝄞', '✦'], c: ['#f6dc8c', '#fff3cf', '#ffffff', '#d9b45a'] } };
 let trailStep = 0;
 addEventListener('pointermove', e => {
   const on = document.querySelector('.theme.on'), style = on && TRAIL[on.id];
@@ -601,7 +602,7 @@ const TM_PRESETS = {
 let tm = { font: '原样', fill: '原样', shadow: '原样', stroke: '原样', bold: false, reflect: false };
 try { tm = { ...tm, ...(window.BAKED ? BAKED.title : JSON.parse(localStorage.getItem(TM_KEY))) }; } catch {}
 const tmStyle = document.createElement('style'); document.head.appendChild(tmStyle);
-const TITLES = '#D .d-title';
+const TITLES = '#hall .d-title';
 function applyTM() {
   const f = TM.font[tm.font], fill = TM.fill[tm.fill], sh = TM.shadow[tm.shadow], st = TM.stroke[tm.stroke];
   const any = f || fill || sh || st || tm.bold || tm.reflect;
