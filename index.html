@@ -100,13 +100,13 @@ body.white-sent #hall .part { color: #fff; }
 #hall .go:focus-visible, #hall .copy:focus-visible, body[data-t="hall"] .drawer-btn:focus-visible { outline: 1px dotted #000; outline-offset: -4px; }
 body[data-t="hall"] .drawer-btn { min-width: 0; padding: 5px 9px; font-size: 14px; line-height: 0; }
 #hall .copy { min-width: 0; padding-left: 12px; padding-right: 12px; }
-.ico { width: 1.25em; height: 1.25em; vertical-align: -.25em; fill: none; stroke: currentColor; stroke-width: 1.3; stroke-linecap: round; stroke-linejoin: round; }
+.ico { width: 1.25em; height: 1.25em; vertical-align: -.25em; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: square; stroke-linejoin: miter; shape-rendering: crispEdges; }
 .drawer-btn .ico { width: 18px; height: 18px; vertical-align: 0; }
 /* the two helpers are bare icons, not buttons: no box, a soft white that brightens on hover */
 #hall .copy, body[data-t="hall"] .drawer-btn { background: none; border: 0; box-shadow: none; color: rgba(255,255,255,.62);
-  filter: drop-shadow(0 1px 2px rgba(0,0,0,.7)); transition: color .2s; }
+  filter: drop-shadow(1px 1px 0 rgba(0,0,0,.85)); transition: color .2s; }
 #hall .copy:hover, body[data-t="hall"] .drawer-btn:hover, #hall .copy:active, body[data-t="hall"] .drawer-btn:active {
-  background: none; border: 0; box-shadow: none; color: #fff; filter: drop-shadow(0 1px 2px rgba(0,0,0,.7)); }
+  background: none; border: 0; box-shadow: none; color: #fff; filter: drop-shadow(1px 1px 0 rgba(0,0,0,.85)); }
 #hall .copy:focus-visible, body[data-t="hall"] .drawer-btn:focus-visible { outline: 1px dotted #fff; outline-offset: 0; }
 #hall .copy { padding-left: 6px; padding-right: 6px; }
 body[data-t="hall"] .drawer { background: #1b1006; color: #f3e2b8; font-family: var(--song); border-left: 3px double #c9a34a; }
@@ -148,12 +148,12 @@ body.cover .stage { flex: 0 0 auto; }
   <div class="d-head"><h1 class="d-title">作曲家烂梗机</h1></div>
   <div class="stage">
     <div class="sent" data-sent></div>
-    <div class="btns"><button class="go" type="button" data-go>抽</button><button class="copy" type="button" data-copy aria-label="复制这句" title="复制这句"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><rect x="5.5" y="5.5" width="8" height="8.5" rx="1"/><path d="M3.5 10.5h-.5a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1h6.5a1 1 0 0 1 1 1v.5"/></svg></button></div>
+    <div class="btns"><button class="go" type="button" data-go>抽</button><button class="copy" type="button" data-copy aria-label="复制这句" title="复制这句"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><rect x="5.5" y="5.5" width="8" height="8.5"/><path d="M3.5 10.5H2V2h8v1.5"/></svg></button></div>
   </div>
 </section>
 
 
-<button type="button" class="drawer-btn" id="drawerBtn" aria-expanded="false" aria-controls="drawer" aria-label="历史记录" title="历史记录"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><rect x="1.5" y="2.5" width="13" height="11" rx="1"/><path d="M10 2.5v11M11.8 5.5h1.2M11.8 7.5h1.2M11.8 9.5h1.2"/></svg></button>
+<button type="button" class="drawer-btn" id="drawerBtn" aria-expanded="false" aria-controls="drawer" aria-label="历史记录" title="历史记录"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><rect x="1.5" y="2.5" width="13" height="11"/><path d="M10 2.5v11M11.8 5.5h1.2M11.8 7.5h1.2M11.8 9.5h1.2"/></svg></button>
 <div class="veil" id="veil" hidden></div>
 <aside class="drawer" id="drawer" aria-label="历史记录和设置" hidden>
   <div class="dtitle"><span>历史记录</span><span class="dcount" id="dcount"></span><button type="button" class="dclose" id="drawerClose" aria-label="关闭">✕</button></div>
@@ -242,7 +242,7 @@ function one() {
 showHistory();
 document.querySelectorAll('[data-go]').forEach(b => { b.dataset.label = b.textContent; b.addEventListener('click', one); });
 document.querySelectorAll('[data-copy]').forEach(b => b.addEventListener('click', async () => {
-  try { await navigator.clipboard.writeText(text(current)); b.innerHTML = '<svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3.2L13 4.8"/></svg>'; b.title = '复制好了'; setTimeout(() => { b.innerHTML = '<svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><rect x="5.5" y="5.5" width="8" height="8.5" rx="1"/><path d="M3.5 10.5h-.5a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1h6.5a1 1 0 0 1 1 1v.5"/></svg>'; b.title = '复制这句'; }, 1200); } catch {}
+  try { await navigator.clipboard.writeText(text(current)); b.innerHTML = '<svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3.2L13 4.8"/></svg>'; b.title = '复制好了'; setTimeout(() => { b.innerHTML = '<svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><rect x="5.5" y="5.5" width="8" height="8.5"/><path d="M3.5 10.5H2V2h8v1.5"/></svg>'; b.title = '复制这句'; }, 1200); } catch {}
 }));
 document.addEventListener('keydown', e => { if (e.key === ' ' && !e.target.closest('select')) { e.preventDefault(); one(); } });
 document.addEventListener('keyup', e => { if (e.key === ' ') e.preventDefault(); });
