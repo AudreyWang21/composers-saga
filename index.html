@@ -108,7 +108,7 @@ body[data-t="hall"] .dtitle span:first-child { color: #f6dc8c; letter-spacing: .
 @media (max-height: 520px) and (orientation: landscape) { #hall .d-sub, #hall .d-rule { display: none; } }
 
 /* ---------- the cover: title and one button; and buttons that wait for the show to end ---------- */
-.btns.waiting { visibility: hidden; }
+.btns.waiting, .drawer-btn.waiting { visibility: hidden; }
 body.cover .sent, body.cover .bubble, body.cover .duo, body.cover .bigduo, body.cover [data-copy], body.cover .drawer-btn { display: none !important; }
 body.cover .theme.on { justify-content: center; gap: 6vh; }
 body.cover .stage { flex: 0 0 auto; }
@@ -204,12 +204,12 @@ function present(s) {
   hang(s);
   const html = render(s);
   document.querySelectorAll('[data-sent]').forEach(el => el.innerHTML = html);
-  document.querySelectorAll('.btns').forEach(b => b.classList.add('waiting'));
+  document.querySelectorAll('.btns, .drawer-btn').forEach(b => b.classList.add('waiting'));
   fit();
   const total = animate(document.querySelector('.theme.on [data-sent]'));
   clearTimeout(present.timer);
   present.timer = setTimeout(() => {
-    document.querySelectorAll('.btns').forEach(b => {
+    document.querySelectorAll('.btns, .drawer-btn').forEach(b => {
       b.classList.remove('waiting');
       if (!reduceMotion()) b.animate([{ opacity: 0, transform: 'translateY(10px)' }, { opacity: 1, transform: 'none' }], { duration: P('按钮淡入'), easing: 'ease-out' });
     });
@@ -259,7 +259,7 @@ const FX = {
                   { transform: 'translateY(-12vh)', offset: .62, easing: 'ease-in' }, { transform: 'none', offset: .78, easing: 'ease-out' },
                   { transform: 'translateY(-4vh)', offset: .89, easing: 'ease-in' }, { transform: 'none', offset: 1 }], 2000, 'linear'],
   '旋转飞入':     [[{ transform: 'translate(60vw,-40vh) rotate(-720deg) scale(.1)', opacity: 0 }, { transform: 'none', opacity: 1 }], 1800, 'ease-out'],
-  '螺旋飞入':     [[{ transform: 'translate(-50vw,30vh) rotate(0) scale(.2)' }, { transform: 'translate(30vw,20vh) rotate(180deg) scale(.5)' },
+  '螺旋飞入':     [[{ transform: 'translate(-75vw,30vh) rotate(0) scale(.2)' }, { transform: 'translate(30vw,20vh) rotate(180deg) scale(.5)' },
                   { transform: 'translate(10vw,-20vh) rotate(300deg) scale(.8)' }, { transform: 'none' }], 2000, 'ease-in-out'],
   '缩放':        [[{ transform: 'scale(0)' }, { transform: 'none' }], 1300, 'linear'],
   '百叶窗·横':     [[{ clipPath: blinds(0) }, { clipPath: blinds(1) }], 1500, 'linear'],
