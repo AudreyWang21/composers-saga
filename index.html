@@ -78,7 +78,7 @@ body { display: flex; flex-direction: column; }
 #hall .big:last-child { left: calc(50% + var(--gap) / 2); }
 #hall .d-head { position: relative; z-index: 3; text-align: center; flex: none; }
 #hall .d-rule { color: #c9a34a; letter-spacing: .1em; font-size: clamp(10px, 1.4vw, 16px); }
-#hall .d-title { display: inline-block; margin: .3em 0 .5em; font: 400 clamp(30px, min(7vw, 9vh), 80px)/1.1 "SimSun", "Songti SC", "STSong", serif;
+#hall .d-title { display: inline-block; margin: .3em 0 .5em; font: 400 clamp(30px, min(11vw, 9vh), 80px)/1.1 "TitleSong", "SimSun", "Songti SC", "STSong", serif;
   color: #fff; text-shadow: .06em .06em .05em rgba(0,0,0,.85);       /* Word's 外部阴影, plainly visible */
   -webkit-box-reflect: below -.1em linear-gradient(transparent 45%, rgba(255,255,255,.35)); }   /* PPT 映像 */
 #hall .d-sub { color: #d9c28a; letter-spacing: .5em; font-size: clamp(11px, 1.5vw, 17px); }
@@ -130,9 +130,11 @@ body.cover .stage { flex: 0 0 auto; }
   -webkit-mask-image: repeating-conic-gradient(#000 0 var(--wheel), transparent 0 var(--seg));
   mask-image: repeating-conic-gradient(#000 0 var(--wheel), transparent 0 var(--seg)); }
 
+/* the title's six characters from 思源宋体 (Noto Serif SC Regular, SIL Open Font License), embedded so every device shows the same title */
+@font-face { font-family: "TitleSong"; src: url(data:font/woff;base64,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) format("woff"); font-display: block; }
 /* the little notes that trail behind the pointer */
-.trail { position: fixed; pointer-events: none; z-index: 60; font-size: 16px; animation: fall 900ms ease-out forwards; }
-@keyframes fall { to { transform: translateY(40px) scale(.3); opacity: 0; } }
+.trail { position: fixed; pointer-events: none; z-index: 60; font-size: 26px; margin: -.6em 0 0 -.3em; animation: fall 900ms ease-out forwards; }
+@keyframes fall { to { transform: translateY(60px) scale(.6); opacity: 0; } }
 
 /* typewriter cursor: a thin bar in the text's own colour, blinking */
 .caret { display: inline-block; position: relative; width: 0; height: 0; }      /* takes no room, so nothing reflows when it goes */
@@ -548,7 +550,7 @@ addEventListener('pointermove', e => {
   const fill = typeof tm !== 'undefined' && TM.fill[tm.fill];
   const palette = fill ? (fill.startsWith('solid:') ? [fill.slice(6)] : fill.match(/#[0-9a-f]{3,6}/gi)) : style.c;
   const col = palette[trailStep++ % palette.length];
-  t.style.color = col; t.style.textShadow = `0 0 6px ${col}`;
+  t.style.color = col; t.style.textShadow = `0 0 9px ${col}`;
   t.style.fontFamily = '"Segoe UI Symbol", "Noto Music", "Apple Symbols", serif';
   document.body.appendChild(t); setTimeout(() => t.remove(), 900);
 });
