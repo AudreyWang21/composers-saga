@@ -37,7 +37,8 @@ body { display: flex; flex-direction: column; }
 
 /* the drawer toggle sits in the top-right corner of the design */
 .drawer-btn { position: fixed; z-index: 55; right: max(10px, env(safe-area-inset-right, 0px)); top: 44px; font-weight: 900; font-size: 15px; padding: 6px 14px; }
-.veil { position: fixed; inset: 0; z-index: 69; background: rgba(0,0,0,.35); }
+.veil { position: fixed; inset: 0; z-index: 69; background: rgba(0,0,0,.35); touch-action: none; }
+.drawer { touch-action: pan-y; }
 .drawer { position: fixed; z-index: 70; top: 0; right: 0; bottom: 0; width: min(400px, 88vw); display: flex; flex-direction: column;
   padding: 14px 16px calc(14px + env(safe-area-inset-bottom, 0px)); transform: translateX(105%); transition: transform .35s ease; }
 .drawer.open { transform: none; }
@@ -78,7 +79,7 @@ body { display: flex; flex-direction: column; }
 #hall .big:last-child { left: calc(50% + var(--gap) / 2); }
 #hall .d-head { position: relative; z-index: 3; text-align: center; flex: none; }
 #hall .d-rule { color: #c9a34a; letter-spacing: .1em; font-size: clamp(10px, 1.4vw, 16px); }
-#hall .d-title { display: inline-block; margin: .3em 0 .5em; padding-left: .1em; letter-spacing: .1em; font: 400 clamp(30px, min(11vw, 9vh), 80px)/1.1 "TitleSong", "SimSun", "Songti SC", "STSong", serif;
+#hall .d-title { display: inline-block; margin: .3em 0 .5em; padding-left: .25em; letter-spacing: .25em; font: 400 clamp(30px, min(11vw, 9vh), 80px)/1.1 "TitleSong", "SimSun", "Songti SC", "STSong", serif;
   color: #fff; text-shadow: .06em .06em .05em rgba(0,0,0,.85);       /* Word's 外部阴影, plainly visible */
   -webkit-box-reflect: below -.1em linear-gradient(transparent 45%, rgba(255,255,255,.35)); }   /* PPT 映像 */
 #hall .d-sub { color: #d9c28a; letter-spacing: .5em; font-size: clamp(11px, 1.5vw, 17px); }
@@ -519,7 +520,7 @@ function fit() {
 }
 addEventListener('resize', fit);
 
-// drawer: hidden until asked for; closes on ✕, the dark veil, or Esc
+// drawer: hidden until asked for; closes on ✕, a tap on the dark veil, a sideways swipe, or Esc
 const drawer = document.getElementById('drawer'), veil = document.getElementById('veil'), dbtn = document.getElementById('drawerBtn');
 function setDrawer(open) {
   drawer.hidden = false; veil.hidden = !open;
@@ -533,6 +534,17 @@ placeBtn(); addEventListener('resize', placeBtn);
 document.getElementById('drawerClose').addEventListener('click', () => setDrawer(false));
 veil.addEventListener('click', () => setDrawer(false));
 addEventListener('keydown', e => { if (e.key === 'Escape') setDrawer(false); });
+// a sideways swipe on the open drawer or the veil closes it (either direction); vertical drags still scroll the list
+let swipe = null;
+[drawer, veil].forEach(el => {
+  // touch events, not pointer events: the browser cancels a pointer as soon as it starts scrolling the list
+  el.addEventListener('touchstart', e => { const p = e.touches[0]; swipe = e.touches.length === 1 ? { x: p.clientX, y: p.clientY } : null; }, { passive: true });
+  el.addEventListener('touchend', e => {
+    if (!swipe) return; const p = e.changedTouches[0], dx = p.clientX - swipe.x, dy = p.clientY - swipe.y; swipe = null;
+    if (Math.abs(dx) > 50 && Math.abs(dx) > 1.5 * Math.abs(dy)) setDrawer(false);
+  }, { passive: true });
+  el.addEventListener('touchcancel', () => { swipe = null; }, { passive: true });
+});
 
 document.body.dataset.t = 'hall';
 requestAnimationFrame(fit);
@@ -621,7 +633,7 @@ function applyTM() {
   const any = f || fill || sh || st || tm.bold || tm.reflect;
   let css = '';
   if (any) {
-    css += `${TITLES} { width: fit-content; margin-left: auto; margin-right: auto; padding-left: 0; padding-right: 0; letter-spacing: .02em; animation: none; transform: none; }
+    css += `${TITLES} { width: fit-content; margin-left: auto; margin-right: auto; padding-left: .25em; padding-right: 0; letter-spacing: .25em; animation: none; transform: none; }
 `;
   }
   const rule = [];
