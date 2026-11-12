@@ -79,7 +79,7 @@ body { display: flex; flex-direction: column; }
 #hall .big:last-child { left: calc(50% + var(--gap) / 2); }
 #hall .d-head { position: relative; z-index: 3; text-align: center; flex: none; }
 #hall .d-rule { color: #c9a34a; letter-spacing: .1em; font-size: clamp(10px, 1.4vw, 16px); }
-#hall .d-title { display: inline-block; margin: .3em 0 .5em; padding-left: .25em; letter-spacing: .25em; font: 400 clamp(30px, min(11vw, 9vh), 80px)/1.1 "TitleSong", "SimSun", "Songti SC", "STSong", serif;
+#hall .d-title { display: inline-block; white-space: nowrap; margin: .3em 0 .5em; padding-left: .25em; letter-spacing: .25em; font: 400 clamp(22px, min(11vw, calc((100vw - 40px) / 7.9), 9vh), 80px)/1.1 "TitleSong", "SimSun", "Songti SC", "STSong", serif;
   color: #fff; text-shadow: .06em .06em .05em rgba(0,0,0,.85);       /* Word's 外部阴影, plainly visible */
   -webkit-box-reflect: below -.1em linear-gradient(transparent 45%, rgba(255,255,255,.35)); }   /* PPT 映像 */
 #hall .d-sub { color: #d9c28a; letter-spacing: .5em; font-size: clamp(11px, 1.5vw, 17px); }
@@ -144,6 +144,31 @@ body.cover .stage { flex: 0 0 auto; }
 @keyframes caretBlink { 50% { opacity: 0; } }
 
 </style>
+<style>
+#protoSettings { font-size: 14px; }
+#protoSettings .dsec { margin-top: 6px; }
+.pRow { display: flex; align-items: center; gap: 8px; margin: 6px 0; }
+.pRow input[type=range] { flex: 1; }
+.pSmall { font-size: 12px; color: #555; display: block; }
+details.pRow { display: block; }
+details.pRow summary { cursor: pointer; }
+.pChips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+@media (max-height: 500px) { #protoSettings { max-height: 45vh; overflow: auto; } }
+.pTracks { margin: 6px 0 0; padding: 0; list-style: none; max-height: 40vh; overflow: auto; border-top: 1px solid #ddd; }
+.pTracks button { display: block; width: 100%; text-align: left; font: inherit; font-size: 13px; padding: 6px 4px; border: 0; border-bottom: 1px solid #eee; background: none; color: inherit; cursor: pointer; }
+.pTracks button:hover { background: #f2f2f2; }
+.pTracks button.on { background: #e4eefa; font-weight: 600; }
+.pTracks button.on::after { content: "  ▶"; }
+/* the drawer scrolls as a whole, so the credits sit at its very bottom */
+.drawer { overflow-y: auto; }
+.drawer .dlist { flex: none; overflow: visible; min-height: auto; }
+.pCreditsAll { margin-top: 14px; padding-top: 10px; border-top: 1px solid #ddd; font-size: 12px; line-height: 1.55; color: #444; }
+.pCreditsAll p { margin: 4px 0; }
+.pCredits { margin: 4px 0 0; padding: 0; list-style: none; }
+.pCredits li { padding: 3px 0; border-bottom: 1px solid #eee; word-break: break-word; }
+.pCreditsAll a { color: #1a5fb4; }
+.pChips button { font: inherit; font-size: 13px; padding: 3px 9px; border: 1px solid #999; background: #f4f4f4; border-radius: 2px; }
+</style>
 </head>
 <body>
 
@@ -163,14 +188,14 @@ body.cover .stage { flex: 0 0 auto; }
 <aside class="drawer" id="drawer" aria-label="历史记录和设置" hidden>
   <div class="dtitle"><span>历史记录</span><span class="dcount" id="dcount"></span><button type="button" class="dclose" id="drawerClose" aria-label="关闭">✕</button></div>
   <ul class="dlist" id="dlist"></ul>
-  <!-- settings go here, under a 设置 heading (.dsec), once there are any -->
+  <div id="protoSettings"></div>
   <p class="dnote credit">金色大厅照片：Derbrauni，Wikimedia Commons，CC BY 4.0。</p>
 </aside>
 
 <script>window.BAKED = {"speed": {"master": 1, "fx": {"淡入": 3000, "飞入·自右侧": 4000, "飞入·自左侧": 4000, "飞入·自顶部": 3000, "飞入·自底部": 3000, "弹跳": 2000, "旋转飞入": 1800, "螺旋飞入": 2000, "缩放": 3000, "百叶窗·横": 1500, "百叶窗·竖": 1500, "擦除·自左": 3000, "擦除·自右": 3000, "擦除·自上": 1000, "擦除·自下": 1000, "擦除·中间向两侧": 3000, "擦除·两侧向中间": 3000, "擦除·中心向外": 3000, "打字机": 3000, "翻转": 2000, "回旋": 1700, "光速": 1200, "玩具风车": 2000, "轮子·4 辐": 2000, "菱形": 1800, "盒状": 1800, "十字形扩展": 1800, "棋盘": 2000, "随机线条": 2000, "阶梯状": 2000, "挥鞭式": 1500, "曲线向上": 2000, "浮动": 2000, "升起": 2000, "展开": 1500, "投掷": 1600, "字幕式": 3000, "逐字飞入": 700, "溶解": 2000, "逐字弹跳": 900}, "p": {"按下后停顿": 500, "画像浮现": 1400, "两幅画像间隔": 300, "画像后句子开始": 1500, "四面八方·每块飞行": 1500, "四面八方·块间隔": 450, "打字机·每字间隔": 110, "逐字弹跳·每字间隔": 90, "逐字飞入·每字间隔": 70, "动画后按钮出现": 200, "按钮淡入": 500}}, "title": {"font": "原样", "fill": "彩虹", "shadow": "白灰双层", "stroke": "原样", "bold": false, "reflect": false}, "white": true};   // her settings from the tuning page</script>
 <script src="words.js"></script>
 <script>
-const ASSETS = window.BAKED ? '' : '../';   // the finished page sits one folder up
+const ASSETS = '';   // the prototype sits one folder below the finished page   // the finished page sits one folder up
 // Same draw logic as the real page: 情景 + A + 和 + B + 怎么样地 + 做什么 + 。 with A ≠ B.
 const pick = a => a[Math.floor(Math.random() * a.length)];
 function roll() {
@@ -187,7 +212,7 @@ function render(s) {
   return part(s.scene) + part(s.a) + part('和') + part(s.b) + part(s.how) + part(s.act + '。');   // 。 stays with the last word
 }
 
-// portraits we have (public domain, from Wikimedia Commons; see portraits/来源.json); others get an empty frame
+// portraits we have (public domain, from Wikimedia Commons; see 画像/来源.json); others get an empty frame
 const PORTRAIT = { 莫扎特: 'mozart', 巴赫: 'bach', 贝多芬: 'beethoven', 肖邦: 'chopin', 李斯特: 'liszt', 柴可夫斯基: 'tchaikovsky',
                    亨德尔: 'handel', 海顿: 'haydn', 维瓦尔第: 'vivaldi', 帕格尼尼: 'paganini', 萨列里: 'salieri', 车尔尼: 'czerny',
                    舒伯特: 'schubert', 柏辽兹: 'berlioz', 门德尔松: 'mendelssohn', 舒曼: 'schumann', 勃拉姆斯: 'brahms', 马勒: 'mahler',
@@ -197,7 +222,7 @@ function hang(s) {
   for (const k of ['a', 'b']) {
     const name = s[k], f = PORTRAIT[name];
     document.querySelectorAll(`[data-p="${k}"]`).forEach(el => {
-      el.style.backgroundImage = f ? `url("${ASSETS}portraits/${f}.jpg")` : 'none';
+      el.style.backgroundImage = f ? `url("${ASSETS}画像/${f}.jpg")` : 'none';
       if (el.classList.contains('big')) el.classList.add('shown');
       el.textContent = f ? '' : (el.classList.contains('big') ? '（此处应有画像）' : '（画像修复中）');
     });
@@ -663,5 +688,7 @@ applyTM();
 // sentence colour, cream or pure white (shadow unchanged)
 if (window.BAKED) document.body.classList.toggle('white-sent', BAKED.white);
 </script>
+<script src="clips/clips.js"></script>
+<script src="sound.js"></script>
 </body>
 </html>
