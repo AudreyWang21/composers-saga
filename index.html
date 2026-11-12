@@ -212,7 +212,7 @@ function render(s) {
   return part(s.scene) + part(s.a) + part('和') + part(s.b) + part(s.how) + part(s.act + '。');   // 。 stays with the last word
 }
 
-// portraits we have (public domain, from Wikimedia Commons; see 画像/来源.json); others get an empty frame
+// portraits we have (public domain, from Wikimedia Commons; see portraits/来源.json); others get an empty frame
 const PORTRAIT = { 莫扎特: 'mozart', 巴赫: 'bach', 贝多芬: 'beethoven', 肖邦: 'chopin', 李斯特: 'liszt', 柴可夫斯基: 'tchaikovsky',
                    亨德尔: 'handel', 海顿: 'haydn', 维瓦尔第: 'vivaldi', 帕格尼尼: 'paganini', 萨列里: 'salieri', 车尔尼: 'czerny',
                    舒伯特: 'schubert', 柏辽兹: 'berlioz', 门德尔松: 'mendelssohn', 舒曼: 'schumann', 勃拉姆斯: 'brahms', 马勒: 'mahler',
@@ -222,7 +222,7 @@ function hang(s) {
   for (const k of ['a', 'b']) {
     const name = s[k], f = PORTRAIT[name];
     document.querySelectorAll(`[data-p="${k}"]`).forEach(el => {
-      el.style.backgroundImage = f ? `url("${ASSETS}画像/${f}.jpg")` : 'none';
+      el.style.backgroundImage = f ? `url("${ASSETS}portraits/${f}.jpg")` : 'none';
       if (el.classList.contains('big')) el.classList.add('shown');
       el.textContent = f ? '' : (el.classList.contains('big') ? '（此处应有画像）' : '（画像修复中）');
     });
