@@ -119,6 +119,10 @@ body.cover .stage { flex: 0 0 auto; }
   -webkit-mask-image: repeating-conic-gradient(#000 0 var(--wheel), transparent 0 var(--seg));
   mask-image: repeating-conic-gradient(#000 0 var(--wheel), transparent 0 var(--seg)); }
 
+/* the little notes that trail behind the pointer */
+.trail { position: fixed; pointer-events: none; z-index: 60; font-size: 16px; animation: fall 900ms ease-out forwards; }
+@keyframes fall { to { transform: translateY(40px) scale(.3); opacity: 0; } }
+
 /* typewriter cursor: a thin bar in the text's own colour, blinking */
 .caret { display: inline-block; position: relative; width: 0; height: 0; }      /* takes no room, so nothing reflows when it goes */
 .caret::after { content: ""; position: absolute; left: .03em; bottom: -.12em; width: .07em; height: 1em; background: currentColor;
@@ -150,7 +154,7 @@ body.cover .stage { flex: 0 0 auto; }
   <p class="dnote credit">作曲家画像均为公有领域。金色大厅照片：Derbrauni，Wikimedia Commons，CC BY 4.0。</p>
 </aside>
 
-<script>window.BAKED = {"speed": {"master": 1, "fx": {"淡入": 3000, "飞入·自右侧": 4000, "飞入·自左侧": 4000, "飞入·自顶部": 3000, "飞入·自底部": 3000, "弹跳": 2000, "旋转飞入": 1800, "螺旋飞入": 2000, "缩放": 3000, "百叶窗·横": 1500, "百叶窗·竖": 1500, "擦除·自左": 3000, "擦除·自右": 3000, "擦除·自上": 1000, "擦除·自下": 1000, "擦除·中间向两侧": 3000, "擦除·两侧向中间": 3000, "擦除·中心向外": 3000, "打字机": 3000, "翻转": 2000, "回旋": 1700, "光速": 1200, "玩具风车": 2000, "轮子": 2000, "轮子·4 辐": 2000, "轮子·8 辐": 2000, "菱形": 1800, "盒状": 1800, "十字形扩展": 1800, "棋盘": 2000, "随机线条": 2000, "阶梯状": 2000, "挥鞭式": 1500, "曲线向上": 2000, "浮动": 2000, "升起": 2000, "展开": 1500, "投掷": 1600, "字幕式": 3000, "逐字飞入": 700, "溶解": 2000, "逐字弹跳": 900}, "p": {"按下后停顿": 500, "画像浮现": 900, "大画像浮现（D）": 1400, "两幅画像间隔": 300, "画像后句子开始": 1300, "画像后句子开始（D）": 1500, "四面八方·每块飞行": 1500, "四面八方·块间隔": 450, "打字机·每字间隔": 110, "逐字弹跳·每字间隔": 90, "逐字飞入·每字间隔": 70, "动画后按钮出现": 200, "按钮淡入": 500}}, "title": {"font": "原样", "fill": "彩虹", "shadow": "白灰双层", "stroke": "原样", "bold": false, "reflect": false}, "white": false};   // her settings from the tuning page</script>
+<script>window.BAKED = {"speed": {"master": 1, "fx": {"淡入": 3000, "飞入·自右侧": 4000, "飞入·自左侧": 4000, "飞入·自顶部": 3000, "飞入·自底部": 3000, "弹跳": 2000, "旋转飞入": 1800, "螺旋飞入": 2000, "缩放": 3000, "百叶窗·横": 1500, "百叶窗·竖": 1500, "擦除·自左": 3000, "擦除·自右": 3000, "擦除·自上": 1000, "擦除·自下": 1000, "擦除·中间向两侧": 3000, "擦除·两侧向中间": 3000, "擦除·中心向外": 3000, "打字机": 3000, "翻转": 2000, "回旋": 1700, "光速": 1200, "玩具风车": 2000, "轮子·4 辐": 2000, "菱形": 1800, "盒状": 1800, "十字形扩展": 1800, "棋盘": 2000, "随机线条": 2000, "阶梯状": 2000, "挥鞭式": 1500, "曲线向上": 2000, "浮动": 2000, "升起": 2000, "展开": 1500, "投掷": 1600, "字幕式": 3000, "逐字飞入": 700, "溶解": 2000, "逐字弹跳": 900}, "p": {"按下后停顿": 500, "画像浮现": 900, "大画像浮现（D）": 1400, "两幅画像间隔": 300, "画像后句子开始": 1300, "画像后句子开始（D）": 1500, "四面八方·每块飞行": 1500, "四面八方·块间隔": 450, "打字机·每字间隔": 110, "逐字弹跳·每字间隔": 90, "逐字飞入·每字间隔": 70, "动画后按钮出现": 200, "按钮淡入": 500}}, "title": {"font": "原样", "fill": "彩虹", "shadow": "白灰双层", "stroke": "原样", "bold": false, "reflect": false}, "white": true};   // her settings from the tuning page</script>
 <script src="words.js"></script>
 <script>
 const ASSETS = window.BAKED ? '' : '../';   // the finished page sits one folder up
