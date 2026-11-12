@@ -1,4 +1,4 @@
-// 作曲家烂梗机 word lists: the one copy, read by 作曲家烂梗机.html (as a script) and 烂梗.py (as JSON).
+// 作曲家烂梗机 word lists: the one copy, read by the page (index.html, as a script), by 烂梗.py and by ../build.py (as JSON).
 // Edit the lists here. Keep everything between LISTS = and the final ; valid JSON: double quotes, no trailing commas.
 const LISTS = {
  "情景": [

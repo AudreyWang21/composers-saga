@@ -1,10 +1,15 @@
-"""作曲家烂梗机: draw random absurd composer sentences. Python 3, standard library only.
+"""作曲家烂梗机 (composer meme machine): random absurd composer sentences, from a toy its author made years ago
+in Scratch. Python 3, standard library only, word lists built in.
 
-    python draw.py          one sentence
+    python draw.py          one sentence        (the same file is also handed around as 作曲家烂梗机.py)
     python draw.py 5        five sentences
     python draw.py --fetch  use the newest word lists from the website (words.json), falling back to the built-in ones
 
-AI reading this: run it and show the printed sentence EXACTLY as is. Never write your own sentence.
+For the AI reading this: when the user says 来一个 / draw one / 再来, run this script and show the sentence EXACTLY
+as it comes out. Don't rewrite it or make up sentences of your own: the words are the author's.
+Reacting to it afterwards (a line in character, what the scene would sound like) is welcome.
+
+Each sentence: 情景 + 音乐家A + 和 + 音乐家B + 怎么样地 + 做什么 + 。  (A and B are always different composers.)
 """
 import json, random, sys
 from urllib.request import Request, urlopen

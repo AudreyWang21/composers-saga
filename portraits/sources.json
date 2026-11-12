@@ -1,0 +1,161 @@
+{
+ "mozart": {
+  "file": "Wolfgang-amadeus-mozart_1.jpg",
+  "license": "Public domain",
+  "saved": "mozart.jpg"
+ },
+ "bach": {
+  "file": "Johann_Sebastian_Bach.jpg",
+  "license": "Public domain",
+  "saved": "bach.jpg"
+ },
+ "beethoven": {
+  "file": "Joseph_Karl_Stieler's_Beethoven_mit_dem_Manuskript_der_Missa_solemnis.jpg",
+  "license": "Public domain",
+  "saved": "beethoven.jpg"
+ },
+ "chopin": {
+  "file": "Frederic_Chopin_photo.jpeg",
+  "license": "Public domain",
+  "saved": "chopin.jpg"
+ },
+ "liszt": {
+  "file": "Franz_Liszt_by_Herman_Biow-_1843.png",
+  "license": "Public domain",
+  "saved": "liszt.jpg"
+ },
+ "tchaikovsky": {
+  "file": "Tchaikovsky_by_Reutlinger_(cropped).jpg",
+  "license": "Public domain",
+  "saved": "tchaikovsky.jpg"
+ },
+ "handel": {
+  "file": "George_Frideric_Handel_by_Balthasar_Denner.jpg",
+  "license": "Public domain",
+  "saved": "handel.jpg"
+ },
+ "haydn": {
+  "file": "Joseph_Haydn.jpg",
+  "license": "Public domain",
+  "saved": "haydn.jpg"
+ },
+ "vivaldi": {
+  "file": "Vivaldi.jpg",
+  "license": "Public domain",
+  "saved": "vivaldi.jpg"
+ },
+ "paganini": {
+  "file": "Paganini.jpeg",
+  "license": "Public domain",
+  "saved": "paganini.jpg"
+ },
+ "golden-hall": {
+  "file": "Musikverein, Vienna 03.jpg",
+  "license": "CC BY 4.0",
+  "author": "Derbrauni",
+  "saved": "golden-hall.jpg",
+  "credit_shown_on_page": true
+ },
+ "salieri": {
+  "file": "Antonio_Salieri_painted_by_Joseph_Willibrord_Mähler.jpg",
+  "license": "Public domain",
+  "saved": "salieri.jpg",
+  "lead_image": true
+ },
+ "czerny": {
+  "file": "Czerny_2_part.jpg",
+  "license": "Public domain",
+  "saved": "czerny.jpg",
+  "lead_image": true
+ },
+ "schubert": {
+  "file": "Franz_Schubert_by_Wilhelm_August_Rieder_1875.jpg",
+  "license": "Public domain",
+  "saved": "schubert.jpg",
+  "lead_image": true
+ },
+ "berlioz": {
+  "file": "Pierre Petit Hector Berlioz 1863.jpg",
+  "license": "Public domain",
+  "saved": "berlioz.jpg",
+  "artist": "Pierre Petit, 1863"
+ },
+ "mendelssohn": {
+  "file": "Mendelssohn_Bartholdy.jpg",
+  "license": "Public domain",
+  "saved": "mendelssohn.jpg",
+  "artist": "James Warren Childe, 1839"
+ },
+ "schumann": {
+  "file": "Robert_Schumann_1839.jpg",
+  "license": "Public domain",
+  "saved": "schumann.jpg",
+  "lead_image": true
+ },
+ "brahms": {
+  "file": "JohannesBrahms_(cropped).jpg",
+  "license": "Public domain",
+  "saved": "brahms.jpg",
+  "lead_image": true
+ },
+ "mahler": {
+  "file": "Photo_of_Gustav_Mahler_by_Moritz_Nähr_01.jpg",
+  "license": "Public domain",
+  "saved": "mahler.jpg",
+  "lead_image": true
+ },
+ "stravinsky": {
+  "file": "Igor_Stravinsky_LOC_32392u.jpg",
+  "license": "Public domain",
+  "saved": "stravinsky.jpg",
+  "lead_image": true
+ },
+ "prokofiev": {
+  "file": "Sergei_Prokofiev_circa_1918_over_Chair_Bain.jpg",
+  "license": "Public domain",
+  "saved": "prokofiev.jpg",
+  "lead_image": true
+ },
+ "shostakovich": {
+  "file": "Композитор_Дмитрий_Дмитриевич_Шостакович.jpg",
+  "license": "Public domain",
+  "saved": "shostakovich.jpg",
+  "lead_image": true
+ },
+ "rachmaninoff": {
+  "file": "Sergei_Rachmaninoff_cph.3a40575.jpg",
+  "license": "Public domain",
+  "saved": "rachmaninoff.jpg",
+  "lead_image": true
+ },
+ "debussy": {
+  "file": "Claude_Debussy_by_Atelier_Nadar.jpg",
+  "license": "Public domain",
+  "saved": "debussy.jpg",
+  "lead_image": true
+ },
+ "ravel": {
+  "file": "Maurice_Ravel_1925.jpg",
+  "license": "Public domain",
+  "saved": "ravel.jpg",
+  "lead_image": true
+ },
+ "sibelius": {
+  "file": "Jean_Sibelius_circa_1898-1900_(3x4_cropped).jpg",
+  "license": "Public domain",
+  "saved": "sibelius.jpg",
+  "lead_image": true
+ },
+ "wagner": {
+  "file": "RichardWagner.jpg",
+  "license": "Public domain",
+  "saved": "wagner.jpg",
+  "lead_image": true
+ },
+ "saint-saens": {
+  "file": "Saint-Saëns-circa-1880.jpg",
+  "license": "Public domain",
+  "saved": "saint-saens.jpg",
+  "lead_image": true
+ }
+}

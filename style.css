@@ -1,0 +1,154 @@
+/* 作曲家烂梗机: the Golden Hall, a Word-style title, two huge portraits, PowerPoint entrances.
+   System fonts plus one embedded title font: nothing loads from outside (the friends are in China). */
+:root {
+  --heavy: "Microsoft YaHei", "PingFang SC", "Heiti SC", "Noto Sans CJK SC", sans-serif;
+  --song: "SimSun", "Songti SC", "STSong", serif;
+  --ui: "Microsoft YaHei UI", "Microsoft YaHei", "PingFang SC", sans-serif;
+}
+* { box-sizing: border-box; }
+/* one screen, no scrolling; history and settings live in a drawer */
+html, body { margin: 0; height: 100%; overflow: hidden; }
+body { font-family: var(--heavy); background: #fff; color: #000; display: flex; flex-direction: column; }
+button { font: inherit; cursor: pointer; }
+
+/* ======================= the hall ======================= */
+#hall { position: relative; overflow: hidden; display: flex; flex-direction: column; flex: 1 1 auto; min-height: 0;
+  touch-action: pinch-zoom;   /* a one-finger drag draws the note trail; two-finger zoom still works */
+  background: #120a03; color: #f3e2b8; font-family: var(--song);
+  padding: 2vh max(16px, env(safe-area-inset-right, 0px)) 3vh max(16px, env(safe-area-inset-left, 0px)); }   /* the side gutter keeps the sentence 16px off each edge */
+#hall::before { content: ""; position: absolute; inset: -12px; z-index: 0; background: url("portraits/golden-hall.jpg") center 30% / cover no-repeat;
+  filter: blur(1.5px) brightness(.62) sepia(.2) saturate(1.15); }
+#hall::after { content: ""; position: absolute; inset: 0; z-index: 0; background: radial-gradient(ellipse at 50% 40%, transparent 30%, rgba(0,0,0,.7) 100%); }
+
+/* the two portraits sit side by side around the centre, always the same size relative to each other and
+   overlapping by the same share (4% of a portrait), whatever the screen's width or shape; one even opacity,
+   with only a narrow soft edge all round (no visible borders) */
+#hall .bigduo { position: absolute; inset: 0; z-index: 1; display: flex; justify-content: space-between; pointer-events: none;
+  --pw: min(52vw, 70vh); --gap: calc(var(--pw) * -.04); }
+#hall .big { position: absolute; top: 0; height: 100%; width: var(--pw); background: center 15% / cover no-repeat; opacity: 0; filter: sepia(.25) contrast(1.05);
+  display: grid; place-items: center; color: rgba(243,226,184,.35); font: 700 clamp(16px, 2.4vw, 30px) var(--song);
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 15%, #000 85%, transparent 100%), linear-gradient(to bottom, #000 0, #000 62%, transparent 98%);
+  mask-image: linear-gradient(to right, transparent 0, #000 15%, #000 85%, transparent 100%), linear-gradient(to bottom, #000 0, #000 62%, transparent 98%);
+  -webkit-mask-composite: source-in; mask-composite: intersect; }
+#hall .big:first-child { left: calc(50% - var(--gap) / 2 - var(--pw)); }
+#hall .big:last-child { left: calc(50% + var(--gap) / 2); }
+#hall .big.shown { opacity: .5; }
+
+#hall .d-head { position: relative; z-index: 3; text-align: center; flex: none; }
+@media (max-width: 760px) { #hall .d-head { margin-top: 34px; } }
+/* the title: one line at every width (nowrap, and a size that follows the width) */
+#hall .d-title { display: inline-block; white-space: nowrap; margin: .3em 0 .5em; padding-left: .25em; letter-spacing: .25em;
+  font: 400 clamp(22px, min(11vw, calc((100vw - 40px) / 7.9), 9vh), 80px)/1.1 "TitleSong", "SimSun", "Songti SC", "STSong", serif;
+  color: #fff; text-shadow: .06em .06em .05em rgba(0,0,0,.85);       /* Word's 外部阴影, plainly visible */
+  -webkit-box-reflect: below -.1em linear-gradient(transparent 45%, rgba(255,255,255,.35)); }   /* PPT 映像 */
+/* her title style from 调整页 (fill, shadow, outline; --trail colours the notes behind the pointer).
+   Written by build.py from 调整页.data.json: change it in 调整页.html's 标题 panel, not here. */
+/* ==title== */
+#hall .d-title.tuned {
+  width: fit-content; margin-left: auto; margin-right: auto; padding-left: .25em; padding-right: 0; letter-spacing: .25em; animation: none; transform: none;
+  font-weight: 400;
+  background: linear-gradient(90deg, #ff2a2a, #ff8c00, #ffe600, #3dff3d, #00d0ff, #2b5bff, #b02bff); -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent;
+  text-shadow: none;
+  filter: drop-shadow(.04em .04em 0 #fff) drop-shadow(.035em .035em 0 #808080);
+  -webkit-text-stroke: 0;
+  -webkit-box-reflect: below 0 linear-gradient(transparent, transparent);
+  --trail: #ff2a2a, #ff8c00, #ffe600, #3dff3d, #00d0ff, #2b5bff, #b02bff;
+}
+/* ==/title== */
+
+/* the sentence: its parts stay separate for the 四面八方 entrance */
+#hall .stage { position: relative; z-index: 3; flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: min(4vh, 28px); }
+.sent { position: relative; z-index: 3; display: flex; flex-wrap: wrap; align-items: baseline; justify-content: center;
+  gap: .1em 0; line-height: 1.15; text-align: center; padding: 0 4px; }
+#hall .sent { font-size: clamp(24px, min(4.6vw, 6.4vh), 60px); max-width: 100%; }
+.anim { display: inline-block; will-change: transform, opacity, clip-path; }
+.part { display: inline-block; white-space: normal; word-break: keep-all; overflow-wrap: anywhere; }
+#hall .part { font-family: var(--song); font-weight: 700; color: #fbefd0; text-shadow: 0 2px 4px #000, 0 0 14px rgba(0,0,0,.8); }
+body.white-sent #hall .part { color: #fff; }
+
+/* buttons as Windows 7 drew them (2009-2015): a soft grey gloss, light blue on hover, deeper blue when pressed */
+#hall .btns { display: flex; gap: 12px; flex: none; }
+#hall .go { font: 400 clamp(14px, 1.6vw, 17px)/1.2 var(--ui); color: #1e1e1e;
+  padding: 7px 26px; min-width: 7.5em; border: 1px solid #3c7fb1; border-radius: 3px; text-shadow: none;
+  background: linear-gradient(#f2f2f2 0%, #ebebeb 49%, #dddddd 50%, #cfcfcf 100%);
+  box-shadow: inset 0 0 0 1px #9fd7fb, 0 0 6px rgba(80,170,255,.35);   /* the default button */
+  transition: background .2s, border-color .2s, box-shadow .2s; }
+#hall .go:hover { border-color: #3c7fb1; filter: none; background: linear-gradient(#eaf6fd 0%, #d9f0fc 49%, #bee6fd 50%, #a7d9f5 100%); }
+#hall .go:active { border-color: #2c628b; transition: none;
+  background: linear-gradient(#e5f4fc 0%, #c4e5f6 49%, #98d1ef 50%, #68b3db 100%); box-shadow: inset 0 1px 2px rgba(0,0,0,.28); }
+#hall .go:focus-visible { outline: 1px dotted #000; outline-offset: -4px; }
+/* the two helpers (copy, and the history drawer in the top-right corner) are bare icons, not buttons:
+   no box, a soft white that brightens on hover */
+#hall .copy, .drawer-btn { min-width: 0; border: 0; border-radius: 3px; background: none; box-shadow: none; text-shadow: none;
+  color: rgba(255,255,255,.62); filter: drop-shadow(1px 1px 0 rgba(0,0,0,.85)); transition: color .2s; }
+#hall .copy:hover, .drawer-btn:hover, #hall .copy:active, .drawer-btn:active { color: #fff; }
+#hall .copy:active, .drawer-btn:active { transition: none; }
+#hall .copy:focus-visible, .drawer-btn:focus-visible { outline: 1px dotted #fff; outline-offset: 0; }
+#hall .copy { font: 400 clamp(14px, 1.6vw, 17px)/1.2 var(--ui); padding: 7px 6px; }
+.drawer-btn { position: fixed; z-index: 55; right: max(10px, env(safe-area-inset-right, 0px)); top: 8px;
+  font: 400 14px/0 var(--ui); padding: 5px 9px; }
+.ico { width: 1.25em; height: 1.25em; vertical-align: -.25em; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: square; stroke-linejoin: miter; shape-rendering: crispEdges; }
+.drawer-btn .ico { width: 18px; height: 18px; vertical-align: 0; }
+
+/* the cover: title and one button; and buttons that wait for the show to end */
+.btns.waiting, .drawer-btn.waiting { visibility: hidden; }
+body.cover .sent, body.cover .bigduo, body.cover [data-copy], body.cover .drawer-btn { display: none !important; }
+body.cover #hall { justify-content: center; gap: 6vh; }
+
+/* ======================= the drawer: plain black on white, nothing styled ======================= */
+.veil { position: fixed; inset: 0; z-index: 69; background: rgba(0,0,0,.35); touch-action: none; }
+/* it scrolls as a whole, so the credits sit at its very bottom */
+.drawer { position: fixed; z-index: 70; top: 0; right: 0; bottom: 0; width: min(400px, 88vw); display: flex; flex-direction: column;
+  padding: 14px 16px calc(14px + env(safe-area-inset-bottom, 0px)); transform: translateX(105%); transition: transform .35s ease;
+  overflow-y: auto; touch-action: pan-y;
+  background: #fff; color: #111; font-family: var(--ui); border-left: 1px solid #999; }
+.drawer.open { transform: none; }
+.drawer[hidden] { display: flex !important; visibility: hidden; }
+.drawer.open[hidden] { visibility: visible; }
+@media (prefers-reduced-motion: reduce) { .drawer { transition: none; } }
+.dtitle { display: flex; align-items: baseline; gap: 10px; font-weight: 400; font-size: 18px; }
+.dcount { font-size: 13px; opacity: .75; font-weight: 400; }
+.dclose { margin-left: auto; border: 0; background: transparent; font-size: 20px; color: inherit; }
+.dlist { flex: none; margin: 10px 0; padding: 0; list-style: none; font-size: 15px; line-height: 1.6; }
+.dlist li { padding: 8px 2px; border-bottom: 1px solid #ddd; }
+.dsec { font-size: 16px; padding-top: 4px; }
+
+/* 设置: sound and music (sound.js) */
+#soundSettings { font-size: 14px; }
+#soundSettings .dsec { margin-top: 6px; }
+@media (max-height: 500px) { #soundSettings { max-height: 45vh; overflow: auto; } }
+.pRow { display: flex; align-items: center; gap: 8px; margin: 6px 0; }
+.pRow input[type=range] { flex: 1; }
+.pSmall { font-size: 12px; color: #555; display: block; }
+details.pRow { display: block; }
+details.pRow summary { cursor: pointer; }
+.pChips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+.pChips button { font: inherit; font-size: 13px; padding: 3px 9px; border: 1px solid #999; background: #f4f4f4; border-radius: 2px; }
+.pTracks { margin: 6px 0 0; padding: 0; list-style: none; max-height: 40vh; overflow: auto; border-top: 1px solid #ddd; }
+.pTracks button { display: block; width: 100%; text-align: left; font: inherit; font-size: 13px; padding: 6px 4px; border: 0; border-bottom: 1px solid #eee; background: none; color: inherit; cursor: pointer; }
+.pTracks button:hover { background: #f2f2f2; }
+.pTracks button.on { background: #e4eefa; font-weight: 600; }
+.pTracks button.on::after { content: "  ▶"; }
+/* 出处: every credit, at the very bottom of the drawer */
+.pCreditsAll { margin-top: 14px; padding-top: 10px; border-top: 1px solid #ddd; font-size: 12px; line-height: 1.55; color: #444; }
+.pCreditsAll p { margin: 4px 0; }
+.pCreditsAll a { color: #1a5fb4; }
+.pCredits { margin: 4px 0 0; padding: 0; list-style: none; }
+.pCredits li { padding: 3px 0; border-bottom: 1px solid #eee; word-break: break-word; }
+
+/* ======================= effects ======================= */
+@property --wheel { syntax: '<angle>'; inherits: false; initial-value: 360deg; }
+.wheel { --seg: calc(360deg / var(--spokes, 1));
+  -webkit-mask-image: repeating-conic-gradient(#000 0 var(--wheel), transparent 0 var(--seg));
+  mask-image: repeating-conic-gradient(#000 0 var(--wheel), transparent 0 var(--seg)); }
+/* typewriter cursor: a thin bar in the text's own colour, blinking */
+.caret { position: absolute; width: 0; height: 0; }      /* placed on the typed character's baseline, outside the text: nothing reflows */
+.caret::after { content: ""; position: absolute; left: .03em; bottom: -.12em; width: .07em; height: 1em; background: currentColor;
+  animation: caretBlink .9s steps(1) infinite; }
+@keyframes caretBlink { 50% { opacity: 0; } }
+/* the little notes that trail behind the pointer */
+.trail { position: fixed; pointer-events: none; z-index: 60; font-size: 26px; margin: -.6em 0 0 -.3em; animation: fall 900ms ease-out forwards; }
+@keyframes fall { to { transform: translateY(60px) scale(.6); opacity: 0; } }
+
+/* the title's six characters from 思源宋体 (Noto Serif SC Regular, SIL Open Font License), embedded so every device shows the same title */
+@font-face { font-family: "TitleSong"; src: url(data:font/woff;base64,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) format("woff"); font-display: block; }
